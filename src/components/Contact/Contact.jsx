@@ -37,13 +37,16 @@ const Contact = () => {
       setIsSubmitting(true);
       
       try {
-        // Use axios as requested
-        await axios.post('https://jsonplaceholder.typicode.com/posts', formData);
-        setIsSuccess(true);
+        const response = await axios.post('/api/contact', formData);
+        if (response.data.success) {
+          setIsSuccess(true);
+        } else {
+          throw new Error(response.data.message || 'Failed to send message');
+        }
       } catch (error) {
-        console.error(error);
-        // Fallback to success for demo purposes if fake API fails
-        setIsSuccess(true);
+        console.error('Contact Form Error:', error);
+        // Fallback or show error
+        alert('Something went wrong. Please try again later.');
       } finally {
         setIsSubmitting(false);
       }
