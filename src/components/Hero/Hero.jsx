@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowDown, FiGithub, FiLinkedin, FiInstagram } from 'react-icons/fi';
+import { FiArrowDown, FiGithub, FiLinkedin, FiInstagram, FiMail } from 'react-icons/fi';
 import { FaXTwitter, FaWhatsapp } from 'react-icons/fa6';
 import styles from './Hero.module.css';
 import { blurIn, staggerContainer } from '../../utils/animations';
@@ -85,7 +85,8 @@ const Hero = () => {
             </motion.div>
             <motion.div variants={blurIn} className={styles.heroEmailWrapper}>
               <a href="mailto:muhammedsyam.dev@gmail.com" className={styles.heroEmail}>
-                muhammedsyam.dev@gmail.com
+                <FiMail className={styles.mailIcon} />
+                <span>muhammedsyam.dev@gmail.com</span>
               </a>
             </motion.div>
           </div>
