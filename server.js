@@ -43,6 +43,12 @@ app.post('/api/contact', async (req, res) => {
   });
 
   try {
+    console.log('Attempting to send email...');
+    
+    // Verify connection configuration
+    await transporter.verify();
+    console.log('SMTP server is ready to take our messages');
+
     await transporter.sendMail({
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
@@ -60,9 +66,10 @@ app.post('/api/contact', async (req, res) => {
       `
     });
 
+    console.log('Email sent successfully!');
     res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Nodemailer Error:', error);
+    console.error('Nodemailer Error Details:', error);
     res.status(500).json({ success: false, message: 'Failed to send email', error: error.message });
   }
 });
