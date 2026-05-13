@@ -47,10 +47,10 @@ const Contact = () => {
 
         // Send email via EmailJS
         const result = await emailjs.send(
-          'YOUR_SERVICE_ID', // FIXME: Replace with your EmailJS Service ID
-          'YOUR_TEMPLATE_ID', // FIXME: Replace with your EmailJS Template ID
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
           templateParams,
-          'YOUR_PUBLIC_KEY' // FIXME: Replace with your EmailJS Public Key
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
         );
 
         if (result.status === 200) {
