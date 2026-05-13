@@ -18,6 +18,7 @@ app.use(express.json());
 
 // Create transporter once and reuse it
 const transporter = nodemailer.createTransport({
+  pool: true, // reuse connection
   host: 'smtp.gmail.com',
   port: 465,
   secure: true,
