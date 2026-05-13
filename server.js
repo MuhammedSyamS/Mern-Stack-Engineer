@@ -37,17 +37,13 @@ app.get('/api/health', (req, res) => {
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
-  console.log('Received contact form request:', req.body);
   const { name, email, message } = req.body;
 
-  // Verify environment variables
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
     return res.status(500).json({ success: false, message: 'Server configuration error' });
   }
 
   try {
-    console.log('Sending email...');
-    
     await transporter.sendMail({
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
@@ -65,10 +61,9 @@ app.post('/api/contact', async (req, res) => {
       `
     });
 
-    console.log('Email sent successfully!');
     res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Nodemailer Error:', error);
+    console.error('Email sending failed:', error.message);
     res.status(500).json({ success: false, message: 'Failed to send email' });
   }
 });
