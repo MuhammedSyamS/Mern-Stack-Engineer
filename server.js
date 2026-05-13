@@ -63,6 +63,7 @@ app.post('/api/contact', async (req, res) => {
 
     res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
+    console.error('Nodemailer Error Details:', error);
     res.status(500).json({ success: false, message: 'Failed to send email' });
   }
 });
