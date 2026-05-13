@@ -50,6 +50,10 @@ const Hero = () => {
           animate="visible"
           className={styles.content}
         >
+          <motion.div variants={blurIn} className={styles.profileImageWrapper}>
+            <img src="/profile.jpg" alt="Muhammed Syam" className={styles.heroImage} />
+          </motion.div>
+
           <motion.h1 className={styles.title}>
             {titleWords.map((word, index) => (
               <motion.span key={index} variants={blurIn} className={styles.word}>

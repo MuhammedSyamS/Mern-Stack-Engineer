@@ -80,10 +80,6 @@ const About = () => {
           </div>
 
           <div className={styles.highlights}>
-            <motion.div variants={fadeUp} className={styles.imageWrapper}>
-              <img src="/profile.jpg" alt="Muhammed Syam S" className={styles.profileImage} />
-            </motion.div>
-
             <motion.div variants={fadeUp} whileHover="hover" className={styles.highlightCard}>
               <motion.div className={styles.cardContent} variants={{ hover: { x: 10 } }}>
                 <h3>{monthsCount}+</h3>

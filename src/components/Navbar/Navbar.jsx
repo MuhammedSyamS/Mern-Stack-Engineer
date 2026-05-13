@@ -39,7 +39,7 @@ const Navbar = () => {
       <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
         <div className={styles.container}>
           <Link to="/" className={styles.logo}>
-            Ms<span>.</span>
+            
           </Link>
 
           <div className={styles.desktopLinks}>
