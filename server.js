@@ -19,8 +19,14 @@ app.use(express.json());
 // Serve static files from the Vite build directory
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', message: 'Server is running' });
+});
+
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
+  console.log('Received contact form request:', req.body);
   const { name, email, message } = req.body;
 
   // Verify environment variables
