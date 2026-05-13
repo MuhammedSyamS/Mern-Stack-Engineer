@@ -50,41 +50,43 @@ const Hero = () => {
           animate="visible"
           className={styles.content}
         >
+          <div className={styles.textContent}>
+            <motion.h1 className={styles.title}>
+              {titleWords.map((word, index) => (
+                <motion.span key={index} variants={blurIn} className={styles.word}>
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h1>
+
+            <motion.div variants={blurIn} className={styles.roleContainer}>
+              <span className={styles.roleText}>{displayedText}</span>
+              <span className={styles.cursor}>|</span>
+            </motion.div>
+
+            <motion.p variants={blurIn} className={styles.description}>
+              I craft responsive, high-performance web applications with modern technologies.
+              Specializing in the MERN stack with a keen eye for design and user experience.
+            </motion.p>
+
+            <motion.div variants={blurIn} className={styles.statsContainer}>
+              <motion.div whileHover={{ y: -8, scale: 1.02 }} className={styles.statCard}>
+                <h3>5+</h3>
+                <p>Months Experience</p>
+              </motion.div>
+              <motion.div whileHover={{ y: -8, scale: 1.02 }} className={styles.statCard}>
+                <h3>2</h3>
+                <p>Projects Built</p>
+              </motion.div>
+              <motion.div whileHover={{ y: -8, scale: 1.02 }} className={styles.statCard}>
+                <h3>100%</h3>
+                <p>Dedication</p>
+              </motion.div>
+            </motion.div>
+          </div>
+
           <motion.div variants={blurIn} className={styles.profileImageWrapper}>
             <img src="/profile.jpg" alt="Muhammed Syam" className={styles.heroImage} />
-          </motion.div>
-
-          <motion.h1 className={styles.title}>
-            {titleWords.map((word, index) => (
-              <motion.span key={index} variants={blurIn} className={styles.word}>
-                {word}
-              </motion.span>
-            ))}
-          </motion.h1>
-
-          <motion.div variants={blurIn} className={styles.roleContainer}>
-            <span className={styles.roleText}>{displayedText}</span>
-            <span className={styles.cursor}>|</span>
-          </motion.div>
-
-          <motion.p variants={blurIn} className={styles.description}>
-            I craft responsive, high-performance web applications with modern technologies.
-            Specializing in the MERN stack with a keen eye for design and user experience.
-          </motion.p>
-
-          <motion.div variants={blurIn} className={styles.statsContainer}>
-            <motion.div whileHover={{ y: -8, scale: 1.02 }} className={styles.statCard}>
-              <h3>5+</h3>
-              <p>Months Experience</p>
-            </motion.div>
-            <motion.div whileHover={{ y: -8, scale: 1.02 }} className={styles.statCard}>
-              <h3>2</h3>
-              <p>Projects Built</p>
-            </motion.div>
-            <motion.div whileHover={{ y: -8, scale: 1.02 }} className={styles.statCard}>
-              <h3>100%</h3>
-              <p>Dedication</p>
-            </motion.div>
           </motion.div>
         </motion.div>
 
