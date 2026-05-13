@@ -65,7 +65,7 @@ const Contact = () => {
           <h2 className="section-title">Let's Build Together</h2>
           <p className={styles.subtitle}>
             Have a project in mind or just want to say hi? I'm always open to new opportunities
-            and collaborations. Drop me a message below!
+            and collaborations. Drop me a message below or email me directly at <a href="mailto:muhammedsyam.dev@gmail.com" className={styles.emailLink}>muhammedsyam.dev@gmail.com</a>.
           </p>
         </motion.div>
 

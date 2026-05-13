@@ -33,6 +33,17 @@
 .brand p {
   color: var(--muted);
   font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.footerEmail {
+  color: var(--muted);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.footerEmail:hover {
+  color: var(--accent);
 }
 
 .socials {

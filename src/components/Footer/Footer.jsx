@@ -13,6 +13,7 @@ const Footer = () => {
           <div className={styles.brand}>
             <h2>Muhammed Syam<span>.</span></h2>
             <p>Building digital experiences that matter.</p>
+            <a href="mailto:muhammedsyam.dev@gmail.com" className={styles.footerEmail}>muhammedsyam.dev@gmail.com</a>
           </div>
           
           <div className={styles.socials}>
