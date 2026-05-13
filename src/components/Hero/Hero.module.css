@@ -193,6 +193,11 @@
     gap: 2rem;
   }
   
+  .heroTitleWrapper, .imageSection, .restOfText {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
   .heroTitleWrapper {
     order: 1;
     text-align: center;
