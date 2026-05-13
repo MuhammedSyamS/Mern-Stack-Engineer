@@ -18,14 +18,17 @@ app.use(express.json());
 
 // Create transporter once and reuse it
 const transporter = nodemailer.createTransport({
-  pool: true, // reuse connection
+  pool: true,
   host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false, // use STARTTLS
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
-  }
+  },
+  connectionTimeout: 10000, // 10 seconds
+  greetingTimeout: 10000,
+  socketTimeout: 10000
 });
 
 // Serve static files from the Vite build directory
