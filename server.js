@@ -16,6 +16,17 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
 
+// Create transporter once and reuse it
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
 // Serve static files from the Vite build directory
 app.use(express.static(path.join(__dirname, 'dist')));
 
@@ -31,26 +42,12 @@ app.post('/api/contact', async (req, res) => {
 
   // Verify environment variables
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    return res.status(500).json({ success: false, message: 'Server configuration error: missing email credentials' });
+    return res.status(500).json({ success: false, message: 'Server configuration error' });
   }
 
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true, // use SSL
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
-
   try {
-    console.log('Attempting to send email...');
+    console.log('Sending email...');
     
-    // Verify connection configuration
-    await transporter.verify();
-    console.log('SMTP server is ready to take our messages');
-
     await transporter.sendMail({
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
@@ -71,8 +68,8 @@ app.post('/api/contact', async (req, res) => {
     console.log('Email sent successfully!');
     res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Nodemailer Error Details:', error);
-    res.status(500).json({ success: false, message: 'Failed to send email', error: error.message });
+    console.error('Nodemailer Error:', error);
+    res.status(500).json({ success: false, message: 'Failed to send email' });
   }
 });
 
