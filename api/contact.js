@@ -16,14 +16,14 @@ export default async function handler(req, res) {
     }
   });
 
-  try {
-    // Send mail
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER, 
-      subject: `New Message from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-      html: `
+try {
+  // Send mail
+  await transporter.sendMail({
+    from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+    to: process.env.EMAIL_USER,
+    subject: `New Message from ${name}`,
+    text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    html: `
         <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
           <h2 style="color: #7c3aed;">New Portfolio Message</h2>
           <p><strong>Name:</strong> ${name}</p>
@@ -33,11 +33,11 @@ export default async function handler(req, res) {
           <p style="white-space: pre-wrap;">${message}</p>
         </div>
       `
-    });
+  });
 
-    return res.status(200).json({ success: true, message: 'Email sent successfully' });
-  } catch (error) {
-    console.error('Nodemailer Error:', error);
-    return res.status(500).json({ success: false, message: 'Failed to send email', error: error.message });
-  }
+  return res.status(200).json({ success: true, message: 'Email sent successfully' });
+} catch (error) {
+  console.error('Nodemailer Error:', error);
+  return res.status(500).json({ success: false, message: 'Failed to send email', error: error.message });
+}
 }
