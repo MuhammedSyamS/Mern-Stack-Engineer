@@ -51,6 +51,15 @@
   min-width: 0;
 }
 
+.imageSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: -3rem;
+  margin-left: auto;
+}
+
 .profileImageWrapper {
   width: 100%;
   max-width: 450px;
@@ -59,7 +68,22 @@
   overflow: hidden;
   border: 4px solid var(--accent);
   box-shadow: 0 0 50px rgba(124, 58, 237, 0.2);
-  margin-left: auto;
+}
+
+.heroSocials {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.heroSocials a {
+  font-size: 1.6rem;
+  color: var(--muted);
+  transition: var(--transition);
+}
+
+.heroSocials a:hover {
+  color: var(--accent);
+  transform: translateY(-3px);
 }
 
 .heroImage {
@@ -169,11 +193,16 @@
     order: 2;
   }
   
-  .profileImageWrapper {
+  .imageSection {
     order: 1;
     margin: 0 auto;
+    width: 100%;
+  }
+
+  .profileImageWrapper {
     width: 280px;
     height: 280px;
+    margin: 0 auto;
   }
 
   .statsContainer {

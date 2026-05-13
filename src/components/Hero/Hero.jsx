@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowDown } from 'react-icons/fi';
+import { FiArrowDown, FiGithub, FiLinkedin, FiInstagram } from 'react-icons/fi';
+import { FaXTwitter, FaWhatsapp } from 'react-icons/fa6';
 import styles from './Hero.module.css';
 import { blurIn, staggerContainer } from '../../utils/animations';
 
@@ -85,9 +86,29 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          <motion.div variants={blurIn} className={styles.profileImageWrapper}>
-            <img src="/profile.jpg" alt="Muhammed Syam" className={styles.heroImage} />
-          </motion.div>
+          <div className={styles.imageSection}>
+            <motion.div variants={blurIn} className={styles.profileImageWrapper}>
+              <img src="/profile.jpg" alt="Muhammed Syam" className={styles.heroImage} />
+            </motion.div>
+            
+            <motion.div variants={blurIn} className={styles.heroSocials}>
+              <a href="https://github.com/MuhammedSyamS" target="_blank" rel="noreferrer" aria-label="GitHub">
+                <FiGithub />
+              </a>
+              <a href="https://www.linkedin.com/in/muhammed-syam-s" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <FiLinkedin />
+              </a>
+              <a href="https://x.com/SaifudheenSham" target="_blank" rel="noreferrer" aria-label="X (Twitter)">
+                <FaXTwitter />
+              </a>
+              <a href="https://www.instagram.com/__sham_saifudeen__?igsh=MTg1MXBkejlsOXp5bw==" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <FiInstagram />
+              </a>
+              <a href="https://wa.me/917736815824" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+                <FaWhatsapp />
+              </a>
+            </motion.div>
+          </div>
         </motion.div>
 
         <motion.a
