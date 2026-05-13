@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiCheckCircle } from 'react-icons/fi';
-import emailjs from '@emailjs/browser';
+import axios from 'axios';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import { fadeUp } from '../../utils/animations';
 import styles from './Contact.module.css';
@@ -37,28 +37,16 @@ const Contact = () => {
       setIsSubmitting(true);
       
       try {
-        // Prepare parameters for EmailJS
-        const templateParams = {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          to_name: 'Muhammed Syam',
-        };
-
-        // Send email via EmailJS
-        const result = await emailjs.send(
-          import.meta.env.VITE_EMAILJS_SERVICE_ID,
-          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-          templateParams,
-          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-        );
-
-        if (result.status === 200) {
+        const response = await axios.post('/api/contact', formData);
+        if (response.data.success) {
           setIsSuccess(true);
+        } else {
+          throw new Error(response.data.message || 'Failed to send message');
         }
       } catch (error) {
-        console.error('EmailJS Error:', error);
-        alert('Failed to send message. Please ensure your EmailJS IDs are correct.');
+        console.error('Contact Form Error:', error);
+        const errorMessage = error.response?.data?.message || 'Something went wrong. Please try again later.';
+        alert(errorMessage);
       } finally {
         setIsSubmitting(false);
       }
