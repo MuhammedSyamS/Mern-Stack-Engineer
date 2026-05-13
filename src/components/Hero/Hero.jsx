@@ -83,6 +83,11 @@ const Hero = () => {
                 <FaWhatsapp />
               </a>
             </motion.div>
+            <motion.div variants={blurIn} className={styles.heroEmailWrapper}>
+              <a href="mailto:muhammedsyam.dev@gmail.com" className={styles.heroEmail}>
+                muhammedsyam.dev@gmail.com
+              </a>
+            </motion.div>
           </div>
 
           <div className={styles.restOfText}>
