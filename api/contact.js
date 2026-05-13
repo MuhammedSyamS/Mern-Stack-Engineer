@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'muhammedsyams@gmail.com', // FIXME: Replace with your Gmail address
+      user: 'muhammedsyam.dev@gmail.com', // FIXME: Replace with your Gmail address
       pass: 'xfzt ohey nhal kujg'      // App Password provided by user
     }
   });
@@ -19,8 +19,8 @@ export default async function handler(req, res) {
   try {
     // Send mail
     await transporter.sendMail({
-      from: `"Portfolio Contact" <muhammedsyams@gmail.com>`,
-      to: 'muhammedsyams@gmail.com', // FIXME: Replace with your Gmail address
+      from: `"Portfolio Contact" <muhammedsyam.dev@gmail.com>`,
+      to: 'muhammedsyam.dev@gmail.com', 
       subject: `New Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       html: `

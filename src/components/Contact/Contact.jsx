@@ -45,8 +45,8 @@ const Contact = () => {
         }
       } catch (error) {
         console.error('Contact Form Error:', error);
-        // Fallback or show error
-        alert('Something went wrong. Please try again later.');
+        const errorMessage = error.response?.data?.message || 'Something went wrong. Please try again later.';
+        alert(errorMessage);
       } finally {
         setIsSubmitting(false);
       }
