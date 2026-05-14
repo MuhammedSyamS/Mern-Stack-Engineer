@@ -19,9 +19,10 @@ export async function sendEmail(formData) {
     return { error: 'Missing required fields' };
   }
 
-  // Use the exact working config from your other project
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
     auth: {
       user: emailUser,
       pass: emailPass,
@@ -29,6 +30,9 @@ export async function sendEmail(formData) {
   });
 
   try {
+    await transporter.verify();
+    console.log('[NODEMAILER] Transporter verified successfully');
+
     await transporter.sendMail({
       from: `"Portfolio Contact" <${emailUser}>`,
       to: emailUser,
