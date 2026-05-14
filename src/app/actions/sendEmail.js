@@ -35,9 +35,9 @@ export async function sendEmail(formData) {
       pass: emailPass,
     },
     family: 4, // Force IPv4
-    connectionTimeout: 20000,
-    greetingTimeout: 20000,
-    socketTimeout: 20000
+    connectionTimeout: 30000,
+    greetingTimeout: 30000,
+    socketTimeout: 30000
   });
 
   try {
