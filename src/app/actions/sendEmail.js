@@ -25,19 +25,21 @@ export async function sendEmail(formData) {
     return { error: 'Missing required fields' };
   }
 
-  // Create transporter with same settings as server.js
+  // Create transporter with SSL settings (Port 465)
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // use STARTTLS
+    port: 465,
+    secure: true, // use SSL
     auth: {
       user: emailUser,
       pass: emailPass,
     },
-    family: 4, // Force IPv4
+    family: 4,
     connectionTimeout: 30000,
     greetingTimeout: 30000,
-    socketTimeout: 30000
+    socketTimeout: 30000,
+    debug: true,
+    logger: true
   });
 
   try {
@@ -61,7 +63,12 @@ export async function sendEmail(formData) {
     console.log('[SUCCESS] Email sent successfully');
     return { success: true, message: 'Your message has been sent successfully. I will get back to you soon!' };
   } catch (err) {
-    console.error('[RUNTIME_ERROR] Nodemailer failed:', err);
+    console.error('[DETAILED_ERROR] Nodemailer failed:', {
+      message: err.message,
+      code: err.code,
+      command: err.command,
+      response: err.response
+    });
     return { error: 'Failed to send email. Please try again later or contact me directly.' };
   }
 }
