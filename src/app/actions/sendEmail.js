@@ -19,10 +19,9 @@ export async function sendEmail(formData) {
     return { error: 'Missing required fields' };
   }
 
+  // Using 'service: gmail' which we know works on Render (from your highphaus project)
   const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
+    service: 'gmail',
     auth: {
       user: emailUser,
       pass: emailPass,
@@ -30,6 +29,7 @@ export async function sendEmail(formData) {
   });
 
   try {
+    // Verify the connection configuration
     await transporter.verify();
     console.log('[NODEMAILER] Transporter verified successfully');
 
