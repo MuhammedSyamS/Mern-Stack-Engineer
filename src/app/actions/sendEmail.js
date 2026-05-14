@@ -1,9 +1,15 @@
 'use server'
 
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
 export async function sendEmail(formData) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const emailUser = process.env.EMAIL_USER;
+  const emailPass = process.env.EMAIL_PASS;
+
+  if (!emailUser || !emailPass) {
+    console.error('[NODEMAILER] Missing EMAIL_USER or EMAIL_PASS in environment variables.');
+    return { error: 'Email service is not configured. Please contact directly via email.' };
+  }
 
   const name = formData.get('name');
   const email = formData.get('email');
@@ -13,12 +19,25 @@ export async function sendEmail(formData) {
     return { error: 'Missing required fields' };
   }
 
+  // Using the proven 'service: gmail' config that works on Render
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: emailUser,
+      pass: emailPass,
+    },
+  });
+
   try {
-    const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>',
-      to: 'muhammedsyam.dev@gmail.com',
+    await transporter.verify();
+    console.log('[NODEMAILER] Transporter verified successfully');
+
+    await transporter.sendMail({
+      from: `"Portfolio Contact" <${emailUser}>`,
+      to: emailUser,
       replyTo: email,
       subject: `New Message from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       html: `
         <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
           <h2 style="color: #7c3aed;">New Portfolio Message</h2>
@@ -31,14 +50,10 @@ export async function sendEmail(formData) {
       `,
     });
 
-    if (error) {
-      console.error('[RESEND ERROR]', error);
-      return { error: 'Failed to send email via Resend.' };
-    }
-
+    console.log('[SUCCESS] Email sent successfully');
     return { success: true, message: 'Your message has been sent successfully. I will get back to you soon!' };
   } catch (err) {
-    console.error('[RUNTIME ERROR]', err);
-    return { error: 'An unexpected error occurred.' };
+    console.error('[RUNTIME_ERROR] Nodemailer failed:', err);
+    return { error: 'Failed to send email. Please ensure your Gmail App Password is correct.' };
   }
 }
