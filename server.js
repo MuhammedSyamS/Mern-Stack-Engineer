@@ -12,6 +12,9 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+const VERSION = "1.0.5 - IPv4 Force 465";
+
+console.log(`Starting Server Version: ${VERSION}`);
 
 app.use(cors());
 app.use(express.json());
