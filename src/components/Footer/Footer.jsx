@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { FiGithub, FiLinkedin, FiInstagram } from 'react-icons/fi';
 import { FaXTwitter, FaWhatsapp } from 'react-icons/fa6';

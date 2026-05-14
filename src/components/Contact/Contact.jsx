@@ -1,7 +1,9 @@
+'use client'
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiCheckCircle } from 'react-icons/fi';
-import axios from 'axios';
+import { sendEmail } from '@/app/actions/sendEmail';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import { fadeUp } from '../../utils/animations';
 import styles from './Contact.module.css';
@@ -37,16 +39,21 @@ const Contact = () => {
       setIsSubmitting(true);
       
       try {
-        const response = await axios.post('/api/contact', formData);
-        if (response.data.success) {
+        const data = new FormData();
+        data.append('name', formData.name);
+        data.append('email', formData.email);
+        data.append('message', formData.message);
+
+        const result = await sendEmail(data);
+        
+        if (result.success) {
           setIsSuccess(true);
         } else {
-          throw new Error(response.data.message || 'Failed to send message');
+          throw new Error(result.error || 'Failed to send message');
         }
       } catch (error) {
         console.error('Contact Form Error:', error);
-        const errorMessage = error.response?.data?.message || error.message || 'Something went wrong. Please try again later.';
-        alert(`Error: ${errorMessage}`);
+        alert(`Error: ${error.message || 'Something went wrong. Please try again later.'}`);
       } finally {
         setIsSubmitting(false);
       }

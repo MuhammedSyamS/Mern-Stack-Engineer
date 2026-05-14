@@ -1,6 +1,7 @@
+'use client'
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { FiArrowRight, FiGithub, FiExternalLink } from 'react-icons/fi';
 import styles from './ProjectCard.module.css';
 
@@ -76,7 +77,7 @@ const ProjectCard = ({ project }) => {
               ))}
             </div>
             
-            <Link to={`/projects/${project.slug}`} className={styles.detailsBtn}>
+            <Link href={`/projects/${project.slug}`} className={styles.detailsBtn}>
               View Details <FiArrowRight />
             </Link>
           </div>
@@ -98,7 +99,7 @@ const ProjectCard = ({ project }) => {
             </div>
             
             <div className={styles.footer}>
-              <Link to={`/projects/${project.slug}`} className={styles.detailsBtn}>
+              <Link href={`/projects/${project.slug}`} className={styles.detailsBtn}>
                 View Details <FiArrowRight />
               </Link>
               <div className={styles.smallLinks}>

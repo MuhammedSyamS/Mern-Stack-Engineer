@@ -1,15 +1,18 @@
+'use client'
+
 import React, { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FiArrowLeft, FiExternalLink, FiGithub } from 'react-icons/fi';
-import { projects } from '../data/projects';
-import PageTransition from '../components/PageTransition/PageTransition';
-import { fadeUp, staggerContainer } from '../utils/animations';
+import { projects } from '@/data/projects';
+import PageTransition from '@/components/PageTransition/PageTransition';
+import { fadeUp, staggerContainer } from '@/utils/animations';
 import styles from './ProjectDetail.module.css';
 
 const ProjectDetail = () => {
   const { slug } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
   const project = projects.find(p => p.slug === slug);
 
   useEffect(() => {
@@ -21,7 +24,7 @@ const ProjectDetail = () => {
       <PageTransition>
         <div className={styles.notFound}>
           <h2>Project Not Found</h2>
-          <button onClick={() => navigate('/#projects')} className={styles.backBtn}>
+          <button onClick={() => router.push('/#projects')} className={styles.backBtn}>
             <FiArrowLeft /> Back to Projects
           </button>
         </div>
@@ -36,7 +39,7 @@ const ProjectDetail = () => {
       <main className={styles.projectDetail}>
         <div className={styles.hero} style={{ backgroundColor: project.color ? `${project.color}15` : 'var(--bg2)' }}>
           <div className={styles.container}>
-            <Link to="/#projects" className={styles.backLink}>
+            <Link href="/#projects" className={styles.backLink}>
               <FiArrowLeft /> Back to Work
             </Link>
             
@@ -117,7 +120,7 @@ const ProjectDetail = () => {
             <h2>More Projects</h2>
             <div className={styles.relatedGrid}>
               {relatedProjects.map(p => (
-                <Link to={`/projects/${p.slug}`} key={p.id} className={styles.relatedCard}>
+                <Link href={`/projects/${p.slug}`} key={p.id} className={styles.relatedCard}>
                   <div className={styles.relatedImage} style={{ backgroundColor: p.imageBg || p.color }}>
                     {p.image ? (
                       <img src={p.image} alt={p.title} className={styles.projectImage} />

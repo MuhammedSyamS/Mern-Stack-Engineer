@@ -1,6 +1,8 @@
+'use client'
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useActiveSection } from '../../hooks/useActiveSection';
 import styles from './Navbar.module.css';
 import { FiMenu, FiX } from 'react-icons/fi';
@@ -17,8 +19,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const activeSection = useActiveSection(['home', 'about', 'projects', 'experience', 'contact']);
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +40,7 @@ const Navbar = () => {
     <>
       <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
         <div className={styles.container}>
-          <Link to="/" className={styles.logo}>
+          <Link href="/" className={styles.logo}>
             
           </Link>
 
@@ -50,7 +52,7 @@ const Navbar = () => {
                     {link.name}
                   </a>
                 ) : (
-                  <Link to={link.href} className={styles.link}>
+                  <Link href={link.href} className={styles.link}>
                     {link.name}
                   </Link>
                 )}
