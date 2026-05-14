@@ -4,6 +4,12 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dns from 'dns';
+
+// Force Node.js to prefer IPv4 over IPv6
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 dotenv.config();
 
@@ -12,7 +18,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-const VERSION = "1.0.5 - IPv4 Force 465";
+const VERSION = "1.0.6 - IPv4 Global Preference";
 
 console.log(`Starting Server Version: ${VERSION}`);
 
