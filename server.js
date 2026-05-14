@@ -43,8 +43,13 @@ app.get('/api/health', (req, res) => {
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
 
+  // Verify environment variables
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    return res.status(500).json({ success: false, message: 'Server configuration error' });
+    console.error('MISSING_ENV_VARS:', { 
+      EMAIL_USER: !!process.env.EMAIL_USER, 
+      EMAIL_PASS: !!process.env.EMAIL_PASS 
+    });
+    return res.status(500).json({ success: false, message: 'Server configuration error: missing credentials' });
   }
 
   try {
