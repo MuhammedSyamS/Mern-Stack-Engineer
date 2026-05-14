@@ -18,7 +18,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-const VERSION = "1.0.6 - IPv4 Global Preference";
+const VERSION = "1.0.7 - IPv4 Global Pref + 587";
 
 console.log(`Starting Server Version: ${VERSION}`);
 
@@ -35,8 +35,8 @@ app.use((req, res, next) => {
 const transporter = nodemailer.createTransport({
   pool: true,
   host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, // use SSL
+  port: 587,
+  secure: false, // use STARTTLS
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
