@@ -1,6 +1,12 @@
 'use server'
 
 import nodemailer from 'nodemailer';
+import dns from 'dns';
+
+// Force Node.js to prefer IPv4 over IPv6 to prevent ENETUNREACH errors on Render
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 export async function sendEmail(formData) {
   const emailUser = process.env.EMAIL_USER;
@@ -21,13 +27,19 @@ export async function sendEmail(formData) {
     return { error: 'Missing required fields' };
   }
 
-  // Using the proven 'service: gmail' config that works on Render
+  // Explicit configuration to force IPv4 and bypass Render port blocks
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // Use STARTTLS
     auth: {
       user: emailUser,
       pass: emailPass,
     },
+    family: 4, // FORCE IPv4 ONLY
+    connectionTimeout: 30000,
+    greetingTimeout: 30000,
+    socketTimeout: 30000
   });
 
   try {
