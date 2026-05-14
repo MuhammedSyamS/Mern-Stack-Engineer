@@ -18,18 +18,17 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-const VERSION = "1.0.7 - IPv4 Global Pref + 587";
+const VERSION = "1.0.8 - API Priority Fix";
 
 console.log(`Starting Server Version: ${VERSION}`);
 
 app.use(cors());
 app.use(express.json());
 
-// Global Request Logger
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-  next();
-});
+// Force Node.js to prefer IPv4 over IPv6
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 // Create transporter once and reuse it
 const transporter = nodemailer.createTransport({
@@ -42,24 +41,15 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS
   },
   family: 4, // Force IPv4
-  connectionTimeout: 20000, // 20 seconds
+  connectionTimeout: 20000,
   greetingTimeout: 20000,
   socketTimeout: 20000
 });
 
-// Serve static files from the Vite build directory
-app.use(express.static(path.join(__dirname, 'dist')));
-
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Server is running' });
-});
-
-// Contact form endpoint
+// API Routes (Must be BEFORE static files)
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
 
-  // Verify environment variables
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
     console.error('MISSING_ENV_VARS:', { 
       EMAIL_USER: !!process.env.EMAIL_USER, 
@@ -92,6 +82,13 @@ app.post('/api/contact', async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 });
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', message: 'Server is running', version: VERSION });
+});
+
+// Serve static files from the Vite build directory
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // For any other requests, serve the index.html from the build
 app.get('*', (req, res) => {
