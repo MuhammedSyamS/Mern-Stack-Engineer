@@ -11,6 +11,8 @@ export async function sendEmail(formData) {
     return { error: 'Email service is not configured. Please contact directly via email.' };
   }
 
+  console.log(`[DEBUG] Attempting to send email via: ${emailUser}`);
+
   const name = formData.get('name');
   const email = formData.get('email');
   const message = formData.get('message');
