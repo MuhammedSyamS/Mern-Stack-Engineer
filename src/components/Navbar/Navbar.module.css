@@ -133,3 +133,9 @@
     display: block;
   }
 }
+
+@media (max-width: 480px) {
+  .mobileLink {
+    font-size: 2.2rem;
+  }
+}

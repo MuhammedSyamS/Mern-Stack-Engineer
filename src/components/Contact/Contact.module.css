@@ -155,4 +155,9 @@
   .formContainer {
     padding: 2rem 1.5rem;
   }
+
+  .submitBtn {
+    align-self: center;
+    width: 100%;
+  }
 }

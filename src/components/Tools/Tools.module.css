@@ -84,11 +84,22 @@
 @media (max-width: 600px) {
   .toolHeader {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 1rem;
+    text-align: center;
   }
   
   .toolRow {
     padding: 1.5rem;
+    text-align: center;
+  }
+
+  .toolRow:hover {
+    transform: none;
+  }
+
+  .toolInfo {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }

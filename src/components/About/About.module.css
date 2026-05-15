@@ -137,4 +137,34 @@
     grid-template-columns: 1fr;
     gap: 3rem;
   }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .skillsContainer {
+    justify-content: center;
+  }
+
+  :global(.section-title)::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 60px 0;
+  }
+  
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .cardContent h3 {
+    font-size: 2.5rem;
+  }
 }

@@ -41,7 +41,7 @@ const Navbar = () => {
       <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
         <div className={styles.container}>
           <Link href="/" className={styles.logo}>
-            
+            Muhammed Syam<span>.</span>
           </Link>
 
           <div className={styles.desktopLinks}>
@@ -113,7 +113,7 @@ const Navbar = () => {
                     </a>
                   ) : (
                     <Link
-                      to={link.href}
+                      href={link.href}
                       className={styles.mobileLink}
                       onClick={() => setMobileMenuOpen(false)}
                     >

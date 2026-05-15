@@ -27,20 +27,25 @@ export async function sendEmail(formData) {
     return { error: 'Missing required fields' };
   }
 
-  // Explicit configuration to force IPv4 and bypass Render port blocks
-  const transporter = nodemailer.createTransport({
+  // Hybrid config: Proven 'service: gmail' + Force IPv4 for Render
+  // Use JSDoc to bypass strict type checking for the transport options
+  /** @type {any} */
+  const transportOptions = {
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // Use STARTTLS
+    port: 465,
+    secure: true, // true for 465, false for other ports
     auth: {
       user: emailUser,
       pass: emailPass,
     },
-    family: 4, // FORCE IPv4 ONLY
-    connectionTimeout: 30000,
-    greetingTimeout: 30000,
-    socketTimeout: 30000
-  });
+    // Aggressive network settings for Render
+    family: 4, 
+    connectionTimeout: 40000,
+    greetingTimeout: 40000,
+    socketTimeout: 40000
+  };
+
+  const transporter = nodemailer.createTransport(transportOptions);
 
   try {
     await transporter.verify();
