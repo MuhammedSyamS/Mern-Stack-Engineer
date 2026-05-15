@@ -26,14 +26,19 @@ const Hero = () => {
             I build real-world web applications using <span className="text-white font-medium">React</span>, <span className="text-white font-medium">Node.js</span> and <span className="text-white font-medium">MongoDB</span>.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center mb-12">
             <a href="#projects" className="btn-primary w-full sm:w-auto">View Projects</a>
-            <a href="#contact" className="btn-secondary w-full sm:w-auto">Contact Me</a>
+            <a href="/resume.pdf" download="Muhammed_Syam_Resume.pdf" className="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2">
+               Download Resume
+            </a>
+            <a href="#contact" className="px-8 py-3 bg-transparent text-gray-300 font-semibold rounded-full transition-all hover:text-white hover:bg-white/5 w-full sm:w-auto">
+               Contact Me
+            </a>
           </div>
 
           <div className="flex flex-col items-center gap-6">
             <p className="text-sm text-gray-500 border-t border-white/5 pt-6 w-full max-w-xs">
-              Currently open to internships and freelance projects.
+              MERN Stack Engineer at HighPhaus.
             </p>
             
             <div className="flex gap-6 text-gray-400">

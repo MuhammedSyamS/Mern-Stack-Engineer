@@ -12,9 +12,17 @@ const About = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="aspect-square bg-gradient-to-br from-brand-primary/20 to-brand-secondary/20 rounded-3xl overflow-hidden border border-white/10 flex items-center justify-center p-12">
-               <span className="text-8xl font-display font-black text-brand-primary opacity-20">MS</span>
-               {/* Could add a real image here later */}
+            <div className="aspect-square rounded-3xl overflow-hidden border border-white/10 relative group">
+               <motion.img 
+                  src="/profile.jpg" 
+                  alt="Muhammed Syam" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  onError={(e) => {
+                     e.target.style.display = 'none';
+                     e.target.parentElement.innerHTML = `<div class="w-full h-full bg-gradient-to-br from-brand-primary/20 to-brand-secondary/20 flex items-center justify-center p-12"><span class="text-8xl font-display font-black text-brand-primary opacity-20">MS</span></div>`;
+                  }}
+               />
+               <div className="absolute inset-0 border-[4px] border-transparent group-hover:border-brand-primary/20 transition-colors duration-500 rounded-3xl pointer-events-none"></div>
             </div>
             <div className="absolute -bottom-6 -right-6 glass-card p-6 border-brand-primary/20">
                <h4 className="text-2xl font-bold text-brand-primary">100%</h4>
@@ -42,8 +50,8 @@ const About = () => {
             
             <div className="mt-8 flex gap-6">
                <div>
-                  <h4 className="font-bold text-white">Freelance</h4>
-                  <p className="text-sm text-gray-500 text-green-500">Available</p>
+                  <h4 className="font-bold text-white">Experience</h4>
+                  <p className="text-sm text-brand-secondary font-semibold">HighPhaus <span className="text-gray-500 font-normal">(Jan 2026 - Present)</span></p>
                </div>
                <div className="w-px h-10 bg-white/10"></div>
                <div>

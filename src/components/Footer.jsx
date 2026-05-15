@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="py-12 border-t border-white/5 bg-bg-dark">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="text-xl font-bold font-display">
-          Muhammed<span className="text-brand-primary">.</span>
+          Muhammed Syam<span className="text-brand-primary">.</span>
         </div>
 
         <p className="text-gray-500 text-sm">
