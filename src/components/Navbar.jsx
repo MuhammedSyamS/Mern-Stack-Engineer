@@ -43,7 +43,7 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
-          <a href="/resume.pdf" download="Muhammed_Syam_Resume.pdf" className="px-5 py-2 bg-brand-primary/10 border border-brand-primary/20 text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition-all text-sm font-semibold">
+          <a href="/Muhammed Syam S Resume.pdf" download="Muhammed_Syam_Resume.pdf" className="px-5 py-2 bg-brand-primary/10 border border-brand-primary/20 text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition-all text-sm font-semibold">
             Resume
           </a>
         </div>
@@ -76,7 +76,7 @@ const Navbar = () => {
               ))}
               <div className="border-t border-white/10 my-2 pt-4"></div>
               <a 
-                href="/resume.pdf" 
+                href="/Muhammed Syam S Resume.pdf" 
                 download="Muhammed_Syam_Resume.pdf"
                 className="text-lg font-medium text-brand-primary hover:text-brand-secondary" 
                 onClick={() => setIsOpen(false)}

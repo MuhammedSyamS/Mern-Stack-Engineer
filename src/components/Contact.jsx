@@ -1,22 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { FiMail } from 'react-icons/fi';
-import emailjs from '@emailjs/browser';
-
-// ─── EmailJS Configuration ───────────────────────────────────────────────────
-// 1. Go to https://www.emailjs.com/ and create a free account
-// 2. Create an Email Service (Gmail) → copy the Service ID below
-// 3. Create an Email Template → copy the Template ID below
-// 4. Go to Account → copy the Public Key below
-// Template variables expected: {{from_name}}, {{from_email}}, {{message}}, {{to_name}}
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. service_xxxxxxx
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. template_xxxxxxx
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. xxxxxxxxxxxxxxx
-// ─────────────────────────────────────────────────────────────────────────────
 
 const Contact = () => {
-  const formRef = useRef();
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
 
@@ -35,24 +22,23 @@ const Contact = () => {
     setStatus('loading');
 
     try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          from_name:  form.name,
-          from_email: form.email,
-          message:    form.message,
-          to_name:    'Muhammed Syam',
+      const response = await fetch('http://localhost:5001/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        EMAILJS_PUBLIC_KEY
-      );
+        body: JSON.stringify(form),
+      });
 
-      setStatus('success');
-      setForm({ name: '', email: '', message: '' });
-
-      setTimeout(() => setStatus('idle'), 5000);
+      if (response.ok) {
+        setStatus('success');
+        setForm({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        throw new Error('Failed to send email');
+      }
     } catch (err) {
-      console.error('EmailJS error:', err);
+      console.error('Contact error:', err);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
@@ -92,7 +78,6 @@ const Contact = () => {
 
           {/* Right – Form */}
           <motion.form
-            ref={formRef}
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}

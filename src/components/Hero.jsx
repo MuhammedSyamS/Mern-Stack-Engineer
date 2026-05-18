@@ -28,7 +28,7 @@ const Hero = () => {
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center mb-12">
             <a href="#projects" className="btn-primary w-full sm:w-auto">View Projects</a>
-            <a href="/resume.pdf" download="Muhammed_Syam_Resume.pdf" className="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2">
+            <a href="/Muhammed Syam S Resume.pdf" download="Muhammed_Syam_Resume.pdf" className="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2">
                Download Resume
             </a>
             <a href="#contact" className="px-8 py-3 bg-transparent text-gray-300 font-semibold rounded-full transition-all hover:text-white hover:bg-white/5 w-full sm:w-auto">
