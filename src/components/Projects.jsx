@@ -21,6 +21,15 @@ const projects = [
     demo: 'https://slook.onrender.com',
     color: '#06b6d4',
     image: '/Slook.png'
+  },
+  {
+    title: 'Vaidhyarmandhiram',
+    description: 'A modern and comprehensive website for an Ayurveda hospital, providing detailed treatment information, online consultations, and patient resources.',
+    stack: ['Astro', 'React', 'Tailwind CSS', 'MongoDB'],
+    github: 'https://github.com/MuhammedSyamS/vaidhyarmandhiram',
+    demo: 'https://www.vaidhyarmandhiram.com',
+    color: '#10b981',
+    image: ''
   }
 ];
 
