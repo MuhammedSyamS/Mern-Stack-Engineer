@@ -5,14 +5,12 @@ const educationData = [
   {
     degree: 'BCA (Bachelor of Computer Applications)',
     institution: 'Indira Gandhi National Open University (IGNOU)',
-    status: 'Currently Pursuing',
-    description: 'Focusing on advanced programming, software engineering principles, and database management.'
+    status: 'Currently Pursuing'
   },
   {
     degree: 'Computer Science',
-    institution: 'Senior Higher Secondary',
-    status: 'Completed',
-    description: 'Studied foundational computer science concepts, programming logic, and mathematics.'
+    institution: "St Mary's Senior Higher Secondary",
+    status: 'Completed'
   }
 ];
 
@@ -41,7 +39,7 @@ const Education = () => {
               className="glass-card p-8 border-white/5 hover:border-brand-primary/30 transition-colors relative overflow-hidden group"
             >
               <div className="absolute top-0 left-0 w-1 h-full bg-brand-primary/50 group-hover:bg-brand-primary transition-colors"></div>
-              <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-1">{item.degree}</h3>
                   <p className="text-brand-secondary font-medium">{item.institution}</p>
@@ -50,9 +48,11 @@ const Education = () => {
                   {item.status}
                 </span>
               </div>
-              <p className="text-gray-400 leading-relaxed">
-                {item.description}
-              </p>
+              {item.description && (
+                <p className="text-gray-400 leading-relaxed mt-4">
+                  {item.description}
+                </p>
+              )}
             </motion.div>
           ))}
         </div>
