@@ -29,7 +29,7 @@ const projects = [
     github: 'https://github.com/MuhammedSyamS/vaidhyarmandhiram',
     demo: 'https://www.vaidhyarmandhiram.com',
     color: '#10b981',
-    image: ''
+    image: '/vmfavicon.jpeg'
   }
 ];
 
