@@ -1,74 +1,98 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle } from 'lucide-react';
-import { FiMail } from 'react-icons/fi';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { FiMail } from "react-icons/fi";
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle | loading | success | error
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState("idle");
 
   const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!form.name || !form.email || !form.message) {
-      setStatus('error');
+      setStatus("error");
       return;
     }
 
-    setStatus('loading');
+    setStatus("loading");
 
     try {
-      const response = await fetch('http://localhost:5001/api/contact', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5001/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
       });
 
       if (response.ok) {
-        setStatus('success');
-        setForm({ name: '', email: '', message: '' });
-        setTimeout(() => setStatus('idle'), 5000);
+        setStatus("success");
+        setForm({
+          name: "",
+          email: "",
+          message: "",
+        });
+
+        setTimeout(() => setStatus("idle"), 5000);
       } else {
-        throw new Error('Failed to send email');
+        throw new Error();
       }
-    } catch (err) {
-      console.error('Contact error:', err);
-      setStatus('error');
-      setTimeout(() => setStatus('idle'), 5000);
+    } catch {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
     }
   };
 
   return (
-    <section id="contact" className="section-padding">
-      <div className="max-w-5xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-16">
+    <section
+      id="contact"
+      className="section-padding overflow-hidden"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
-          {/* Left – Info */}
+          {/* Left */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="text-center lg:text-left"
           >
-            <h2 className="text-4xl font-bold mb-6">Let's Connect</h2>
-            <p className="text-xl text-gray-400 mb-10">
-              Have a project or opportunity? I'm always open to discussing new ideas and collaborations.
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+              Let's Connect
+            </h2>
+
+            <p className="text-base sm:text-lg lg:text-xl text-gray-400 leading-8 mb-8 lg:mb-10">
+              Have a project or opportunity? I'm always open to discussing
+              new ideas and collaborations.
             </p>
 
-            <div className="glass-card flex items-center gap-6 border-brand-primary/20">
-              <div className="w-14 h-14 bg-brand-primary/10 rounded-full flex items-center justify-center text-brand-primary shrink-0">
-                <FiMail size={28} />
+            <div className="glass-card border-brand-primary/20 flex items-center gap-4 sm:gap-6 p-5 sm:p-6 rounded-2xl">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary shrink-0">
+                <FiMail size={24} />
               </div>
-              <div>
-                <p className="text-sm text-gray-500 uppercase tracking-widest font-bold">Email Me</p>
+
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm uppercase tracking-widest text-gray-500 font-bold">
+                  Email Me
+                </p>
+
                 <a
                   href="mailto:muhammedsyam.dev@gmail.com"
-                  className="text-lg font-bold hover:text-brand-primary transition-colors break-all"
+                  className="block text-sm sm:text-base lg:text-lg font-bold hover:text-brand-primary transition-colors break-all"
                 >
                   muhammedsyam.dev@gmail.com
                 </a>
@@ -76,95 +100,111 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Right – Form */}
+          {/* Form */}
           <motion.form
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-6"
             onSubmit={handleSubmit}
+            className="space-y-6"
           >
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-gray-400 ml-1">Name</label>
+                <label className="text-sm font-semibold text-gray-400 ml-1">
+                  Name
+                </label>
+
                 <input
                   type="text"
                   name="name"
                   value={form.name}
                   onChange={handleChange}
-                  placeholder="Your Name"
                   required
-                  className="w-full bg-bg-card border border-white/5 rounded-xl p-4 focus:border-brand-primary outline-none transition-all"
+                  placeholder="Your Name"
+                  className="w-full bg-bg-card border border-white/5 rounded-xl p-4 text-sm sm:text-base outline-none focus:border-brand-primary transition"
                 />
               </div>
+
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-gray-400 ml-1">Email</label>
+                <label className="text-sm font-semibold text-gray-400 ml-1">
+                  Email
+                </label>
+
                 <input
                   type="email"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="Your Email"
                   required
-                  className="w-full bg-bg-card border border-white/5 rounded-xl p-4 focus:border-brand-primary outline-none transition-all"
+                  placeholder="Your Email"
+                  className="w-full bg-bg-card border border-white/5 rounded-xl p-4 text-sm sm:text-base outline-none focus:border-brand-primary transition"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-gray-400 ml-1">Message</label>
+              <label className="text-sm font-semibold text-gray-400 ml-1">
+                Message
+              </label>
+
               <textarea
-                rows="5"
+                rows={6}
                 name="message"
                 value={form.message}
                 onChange={handleChange}
-                placeholder="Tell me about your project..."
                 required
-                className="w-full bg-bg-card border border-white/5 rounded-xl p-4 focus:border-brand-primary outline-none transition-all resize-none"
-              ></textarea>
+                placeholder="Tell me about your project..."
+                className="w-full bg-bg-card border border-white/5 rounded-xl p-4 text-sm sm:text-base resize-none outline-none focus:border-brand-primary transition"
+              />
             </div>
 
-            {/* Status Messages */}
-            {status === 'success' && (
+            {status === "success" && (
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-3 text-green-400 bg-green-400/10 border border-green-400/20 rounded-xl px-4 py-3"
+                className="flex items-start gap-3 rounded-xl border border-green-400/20 bg-green-400/10 px-4 py-3 text-green-400"
               >
-                <CheckCircle size={20} className="shrink-0" />
-                <span className="text-sm font-medium">Message sent! I'll get back to you soon.</span>
+                <CheckCircle className="shrink-0 mt-0.5" size={20} />
+
+                <span className="text-sm leading-6">
+                  Message sent! I'll get back to you soon.
+                </span>
               </motion.div>
             )}
 
-            {status === 'error' && (
+            {status === "error" && (
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-3 text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl px-4 py-3"
+                className="flex items-start gap-3 rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-red-400"
               >
-                <AlertCircle size={20} className="shrink-0" />
-                <span className="text-sm font-medium">
+                <AlertCircle className="shrink-0 mt-0.5" size={20} />
+
+                <span className="text-sm leading-6">
                   {!form.name || !form.email || !form.message
-                    ? 'Please fill in all fields before sending.'
-                    : 'Something went wrong. Please email me directly.'}
+                    ? "Please fill in all fields before sending."
+                    : "Something went wrong. Please email me directly."}
                 </span>
               </motion.div>
             )}
 
             <button
               type="submit"
-              disabled={status === 'loading'}
-              className="btn-primary w-full flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={status === "loading"}
+              className="btn-primary w-full flex items-center justify-center gap-2 py-4 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {status === 'loading' ? (
+              {status === "loading" ? (
                 <>
                   <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                  Sending…
+                  Sending...
                 </>
               ) : (
                 <>
                   Send Message
-                  <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <Send
+                    size={18}
+                    className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                  />
                 </>
               )}
             </button>
