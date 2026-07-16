@@ -75,7 +75,7 @@ const projects = [
       "https://github.com/MuhammedSyamS/E-commerce-2-frontend",
     demo: "https://slook.onrender.com",
     color: "#06b6d4",
-    image: "/Slook.png",
+    image: "/slook.png",
   },
 ];
 
